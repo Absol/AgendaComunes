@@ -1,5 +1,6 @@
 package mx.cinvestav.movil.http;
 
+import mx.cinvestav.agendaColab.comun.FormadorVectorEventos;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -60,7 +61,6 @@ public class HttpPostRequest extends HttpRequester {
 			FormadorVectorEventos formador = new FormadorVectorEventos();
 			input = conexion.openDataInputStream();
 			eventosLlegantes = formador.formar(input);
-			input.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -142,6 +142,7 @@ public class HttpPostRequest extends HttpRequester {
 			evento.write(output);
 		}
 		output.flush();//se cierra?
+                output.close();
 	}
 
 	private void addHeaders() throws IOException {
