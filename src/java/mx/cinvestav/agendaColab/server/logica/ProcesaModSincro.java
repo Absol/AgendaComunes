@@ -1,5 +1,8 @@
 package mx.cinvestav.agendaColab.server.logica;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
 import mx.cinvestav.agendaColab.server.logica.dao.ColaDao;
 import mx.cinvestav.agendaColab.server.logica.dao.SincroDao;
 import mx.cinvestav.agendaColab.comun.ActualizacionUsuariosSincronizados;
@@ -11,7 +14,7 @@ public class ProcesaModSincro {
     private static SincroDao mySincroDao = null;
     private static ColaDao myColaDao = null;
 
-    public static boolean procesa(int id, ActualizacionUsuariosSincronizados actualizacion) {
+    public static boolean procesa(int idUsuMandante, ActualizacionUsuariosSincronizados actualizacion) {
         if(mySincroDao == null)
             mySincroDao = new SincroDao();
         if(myColaDao == null)
@@ -20,10 +23,10 @@ public class ProcesaModSincro {
 
         if(actualizacion.getTipoAct() == ActualizacionUsuariosSincronizados.NUEVA_SINCRO)
         {
-            result = mySincroDao.nuevaSincro(id, actualizacion.getUsuario().getId());
+            result = mySincroDao.nuevaSincro(idUsuMandante, actualizacion.getUsuario().getId());
             if(result < 0)
                 return false;
-            result = myColaDao.enqueActSincro(actualizacion, id);
+            result = myColaDao.enqueActSincro(actualizacion, idUsuMandante);
             if(result < 0)
             {
                 log.error("Fallo en transaccion");
@@ -32,12 +35,23 @@ public class ProcesaModSincro {
         }
         else
         {
-            result = mySincroDao.BorraSincro(id, actualizacion.getUsuario().getId());
+            // TODO borrar de posible registros de la cola no
+            result = mySincroDao.BorraSincro(idUsuMandante, actualizacion.getUsuario().getId());
         }
 
         if(result > 0)
             return true;
         else
             return false;
+    }
+
+    public static void desencola(int idCola, DataOutputStream dataOutPut) {
+        ActualizacionUsuariosSincronizados act = myColaDao.dequeActSincro(idCola);
+        try {
+            dataOutPut.writeInt(ActualizacionUsuariosSincronizados.miTipo);
+        } catch (IOException ex) {
+            log.error(ex);
+        }
+        act.write(dataOutPut);
     }
 }

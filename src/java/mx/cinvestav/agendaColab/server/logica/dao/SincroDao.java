@@ -42,7 +42,34 @@ public class SincroDao extends DaoPadre {
         return nuevoId;
     }
 
-    public int BorraSincro(int id, int id0) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public int BorraSincro(int idUsuMandante, int idUsuBorrado) {
+        int idBorrado = 0;
+        Statement stmt = null;
+        try {
+            // TODO borrar en el otro sentido
+            stmt = con.createStatement();
+            String query = "DELETE FROM sincros "
+                    + "WHERE "
+                    + "id_usuario = " + idUsuMandante + " AND "
+                    + "proporciona_a = " + idUsuBorrado;
+            log.debug(query);
+            stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                idBorrado = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            log.error(ex);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex2) {
+                    log.error(ex2);
+                }
+            }
+        }
+
+        return idBorrado;
     }
 }
