@@ -1,7 +1,5 @@
 package mx.cinvestav.movil.http;
 
-import mx.cinvestav.agendaColab.comun.FormadorVectorEventos;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,37 +43,6 @@ public class HttpPostRequest extends HttpRequester {
 		return doc;
 	}
 
-	public Vector pullEventos(Vector eventos) {
-		Integer doc = null;
-		DataInputStream input = null;
-		Vector eventosLlegantes = null;
-		//@TODO desjarcodira la urn
-		String urn = "Pull";
-		String uri = url + urn;
-		
-		System.out.println("d:Getting: " + uri);
-		try {
-			conexion = (HttpConnection) Connector.open(PROTOCOL + uri);
-			addHeaders();
-			addEventos(eventos);
-			FormadorVectorEventos formador = new FormadorVectorEventos();
-			input = conexion.openDataInputStream();
-			eventosLlegantes = formador.formar(input);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (input != null)
-				try {
-					input.close();
-					input = null;
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		}
-
-		return eventosLlegantes;
-	}
-
 	public String getResource(String urn, Hashtable parametros) {
 		String doc = null;
 		String uri = null;
@@ -102,7 +69,7 @@ public class HttpPostRequest extends HttpRequester {
 		return doc;
 	}
 
-	private void addParameters(Hashtable parametros) throws IOException {
+	protected void addParameters(Hashtable parametros) throws IOException {
 		OutputStream output = null;
 		byte postmsg[];
 		Enumeration llaves = parametros.keys();
@@ -127,25 +94,7 @@ public class HttpPostRequest extends HttpRequester {
 		output.flush();
 	}
 
-	private void addEventos(Vector eventos) throws IOException {
-		Evento evento;
-		System.out.println(eventos.size());
-		
-		DataOutputStream output = new DataOutputStream(conexion.openOutputStream());
-
-		output.writeInt(eventos.size());
-		for(int i = 0; i < eventos.size(); i++)
-		{
-			evento = (Evento) eventos.elementAt(i);
-			System.out.println(evento.getMiTipo());
-			output.writeInt(evento.getMiTipo());
-			evento.write(output);
-		}
-		output.flush();//se cierra?
-                output.close();
-	}
-
-	private void addHeaders() throws IOException {
+	protected void addHeaders() throws IOException {
 		conexion.setRequestMethod(HttpConnection.POST);
 		conexion.setRequestProperty("IF-Modified-Since",
 				"10 Nov 2009 17:29:12 GMT");
@@ -154,7 +103,7 @@ public class HttpPostRequest extends HttpRequester {
 		conexion.setRequestProperty("Content-Language", "es-MX");
 	}
 	
-	private String leerResponse() throws IOException
+	protected String leerResponse() throws IOException
 	{
 		InputStream input = null;
 
