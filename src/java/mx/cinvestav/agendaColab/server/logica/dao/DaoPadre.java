@@ -6,14 +6,15 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 public class DaoPadre {
-    protected static Logger log = Logger.getLogger(DaoPadre.class);
+protected static Logger log = Logger.getLogger(DaoPadre.class);
     Connection con;
 
-    public DaoPadre(String url, String user, String pass) {
+    public DaoPadre() {
+
         if (con == null) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection(url, user, pass);
+                con = DriverManager.getConnection("jdbc:mysql://belldandy.no-ip.info:3306/agenda_colab", "agenda", "zapato");
             } catch (SQLException ex) {
                 log.error(ex);
             } catch (ClassNotFoundException ex) {
