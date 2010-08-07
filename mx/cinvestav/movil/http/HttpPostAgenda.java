@@ -7,11 +7,13 @@ package mx.cinvestav.movil.http;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Vector;
 import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
 import mx.cinvestav.agendaColab.comun.Evento;
 import mx.cinvestav.agendaColab.comun.FormadorVectorEventos;
+import mx.cinvestav.agendaColab.comun.beans.BeanCita;
 import mx.cinvestav.agendaColab.comun.beans.BeanUsuario;
 
 /**
@@ -26,7 +28,6 @@ public class HttpPostAgenda extends HttpPostRequest {
 
     public BeanUsuario buscaUsuario(BeanUsuario usuario) {
         BeanUsuario result = null;
-        Integer doc = null;
         DataInputStream input = null;
         String urn = "BuscaUsuario";
         String uri = url + urn;
@@ -95,7 +96,7 @@ public class HttpPostAgenda extends HttpPostRequest {
 
     protected void addEventos(Vector eventos) throws IOException {
         Evento evento;
-        System.out.println(eventos.size());
+        System.out.println("d:size: " + eventos.size());
 
         DataOutputStream output = new DataOutputStream(conexion.openOutputStream());
 
@@ -108,5 +109,46 @@ public class HttpPostAgenda extends HttpPostRequest {
         }
         output.flush();//se cierra?
         output.close();
+    }
+
+    public Vector getCitasAgenas(int idUsu, Date fecIni, Date fecFin) {
+        Vector result = new Vector();
+        DataInputStream input = null;
+        String urn = "CitasAjenas";
+        String uri = url + urn;
+        System.out.println("d:Getting: " + uri);
+
+        try {
+            conexion = (HttpConnection) Connector.open(PROTOCOL + uri);
+            addHeaders();
+            DataOutputStream output = new DataOutputStream(conexion.openOutputStream());
+            output.writeInt(idUsu);
+            output.writeLong(fecIni.getTime());
+            output.writeLong(fecFin.getTime());
+            output.flush();
+            output.close();
+
+            input = conexion.openDataInputStream();
+            int size = input.readInt();
+            BeanCita cita;
+            for(int i = 0; i < size; i++)
+            {
+                cita = new BeanCita();
+                cita.read(input);
+                result.addElement(cita);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return result;
     }
 }
