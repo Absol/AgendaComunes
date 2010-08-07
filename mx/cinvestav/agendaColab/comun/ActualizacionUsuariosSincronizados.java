@@ -2,6 +2,7 @@ package mx.cinvestav.agendaColab.comun;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
+import java.io.IOException;
 import mx.cinvestav.agendaColab.comun.beans.BeanUsuario;
 
 public class ActualizacionUsuariosSincronizados extends Evento {
@@ -53,7 +54,7 @@ public class ActualizacionUsuariosSincronizados extends Evento {
         try {
             dOutput.writeInt(tipoAct);
         usuario.write(dOutput);
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
