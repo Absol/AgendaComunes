@@ -57,7 +57,7 @@ public class Sincronizacion extends Evento {
     }
 
     public void add(Cambio cambio) {
-        getListaCambios().add(cambio);
+        getListaCambios().addElement(cambio);
     }
 
     public int getMiTipo() {
