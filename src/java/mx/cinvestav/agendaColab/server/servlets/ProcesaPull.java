@@ -4,7 +4,7 @@ package mx.cinvestav.agendaColab.server.servlets;
  * @author absol
  */
 
-import mx.cinvestav.agendaColab.server.utils.ProcesEvento;
+import mx.cinvestav.agendaColab.server.logica.ProcesEvento;
 import mx.cinvestav.agendaColab.server.utils.ColaEventos;
 import java.io.IOException;
 

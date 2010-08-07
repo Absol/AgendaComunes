@@ -1,24 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package mx.cinvestav.agendaColab.server.utils;
+package mx.cinvestav.agendaColab.server.logica;
 
-import mx.cinvestav.agendaColab.server.logica.ProcesaCambios;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Vector;
+import org.apache.log4j.Logger;
 import mx.cinvestav.agendaColab.comun.ActualizacionUsuariosSincronizados;
+import mx.cinvestav.agendaColab.comun.Cancelacion;
+import mx.cinvestav.agendaColab.comun.CitaPublica;
+import mx.cinvestav.agendaColab.comun.Confirmacion;
 import mx.cinvestav.agendaColab.comun.Evento;
 import mx.cinvestav.agendaColab.comun.FormadorVectorEventos;
+import mx.cinvestav.agendaColab.comun.Notificacion;
 import mx.cinvestav.agendaColab.comun.PullRequest;
+import mx.cinvestav.agendaColab.comun.Respuesta;
 import mx.cinvestav.agendaColab.comun.Sincronizacion;
-import org.apache.log4j.Logger;
-import mx.cinvestav.agendaColab.server.logica.ProcesaModSincro;
-import mx.cinvestav.agendaColab.server.logica.ProcesaCambios;
 /**
- *
+ * Clase para procesar los eventos entrantes, se llama a una logica especifica
+ * que procese cada evento especificio
  * @author absol
  */
 public class ProcesEvento {
@@ -65,6 +64,23 @@ public class ProcesEvento {
                     Sincronizacion sincro = (Sincronizacion) evento;
                     ProcesaCambios.procesa(id, sincro);
                     break;
+                }
+                case CitaPublica.miTipo: {
+                    CitaPublica cita = (CitaPublica) evento;
+                    ProcesaCitaPublica.procesa(id, cita);
+                    break;
+                }
+                case Cancelacion.miTipo: {
+                    throw new UnsupportedOperationException("Not yet implemented");
+                }
+                case Respuesta.miTipo: {
+                    throw new UnsupportedOperationException("Not yet implemented");
+                }
+                case Notificacion.miTipo: {
+                    throw new UnsupportedOperationException("Not yet implemented");
+                }
+                case Confirmacion.miTipo: {
+                    throw new UnsupportedOperationException("Not yet implemented");
                 }
             }
         }
