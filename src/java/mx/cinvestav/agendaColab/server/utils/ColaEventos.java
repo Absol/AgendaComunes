@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mx.cinvestav.agendaColab.server.utils;
 
 import java.io.DataOutputStream;
@@ -9,7 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletOutputStream;
 import mx.cinvestav.agendaColab.comun.ActualizacionUsuariosSincronizados;
+import mx.cinvestav.agendaColab.comun.Sincronizacion;
 import mx.cinvestav.agendaColab.comun.beans.BeanUsuario;
+import mx.cinvestav.agendaColab.server.logica.ProcesaCambios;
 import mx.cinvestav.agendaColab.server.logica.ProcesaModSincro;
 import mx.cinvestav.agendaColab.server.logica.dao.ColaDao;
 import org.apache.log4j.Logger;
@@ -43,11 +41,14 @@ public class ColaEventos {
                     ProcesaModSincro.desencola(evento.getId(), dataOutPut);
                     break;
                 }
+                case Sincronizacion.miTipo: {
+                    ProcesaCambios.desencola(evento.getId(), dataOutPut);
+                    break;
+                }
             }
         }
 
         try {
-            //escribo la longitud
             dataOutPut.close();
         } catch (IOException ex) {
             log.error(ex);

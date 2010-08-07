@@ -4,6 +4,7 @@
  */
 package mx.cinvestav.agendaColab.server.utils;
 
+import mx.cinvestav.agendaColab.server.logica.ProcesaCambios;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,8 +13,10 @@ import mx.cinvestav.agendaColab.comun.ActualizacionUsuariosSincronizados;
 import mx.cinvestav.agendaColab.comun.Evento;
 import mx.cinvestav.agendaColab.comun.FormadorVectorEventos;
 import mx.cinvestav.agendaColab.comun.PullRequest;
+import mx.cinvestav.agendaColab.comun.Sincronizacion;
 import org.apache.log4j.Logger;
 import mx.cinvestav.agendaColab.server.logica.ProcesaModSincro;
+import mx.cinvestav.agendaColab.server.logica.ProcesaCambios;
 /**
  *
  * @author absol
@@ -56,6 +59,11 @@ public class ProcesEvento {
                 case PullRequest.miTipo: {
                     PullRequest rqst = (PullRequest) evento;
                     id = rqst.getUsuario().getId();
+                    break;
+                }
+                case Sincronizacion.miTipo: {
+                    Sincronizacion sincro = (Sincronizacion) evento;
+                    ProcesaCambios.procesa(id, sincro);
                     break;
                 }
             }

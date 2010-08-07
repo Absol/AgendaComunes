@@ -104,6 +104,7 @@ public class SincroDao extends DaoPadre {
             }
 
             con.commit();
+            con.setAutoCommit(true);
         } catch (SQLException ex) {
             if (con != null) {
                 try {

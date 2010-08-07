@@ -40,6 +40,12 @@ public class ColaDao extends DaoPadre {
                 result.add(event);
             }
             rs.close();
+
+             query = "DELETE FROM cola "
+                    + "WHERE id_usuario = "
+                    + idUsuario;
+            log.debug(query);
+            stmt.executeUpdate(query);
         } catch (SQLException ex) {
             log.error(ex);
         } finally {
