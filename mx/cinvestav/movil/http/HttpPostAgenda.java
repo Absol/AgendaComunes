@@ -151,4 +151,38 @@ public class HttpPostAgenda extends HttpPostRequest {
 
         return result;
     }
+
+    public BeanUsuario registraUsuario(BeanUsuario usu) {
+        BeanUsuario result = null;
+        DataInputStream input = null;
+        String urn = "RegistraUsuairo";
+        String uri = url + urn;
+        System.out.println("d:Getting: " + uri);
+        try {
+            conexion = (HttpConnection) Connector.open(PROTOCOL + uri);
+            addHeaders();
+
+            DataOutputStream output = new DataOutputStream(conexion.openOutputStream());
+            usu.write(output);
+            output.flush();//se cierra?
+            output.close();
+
+            input = conexion.openDataInputStream();
+            result = new BeanUsuario();
+            result.read(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                    input = null;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return result;
+    }
 }
