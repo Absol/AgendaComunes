@@ -16,7 +16,6 @@ import mx.cinvestav.agendaColab.comun.beans.BeanUsuario;
  */
 public class UsuarioDao extends DaoPadre{
 
-
     /**
      * @param login: login del usuairo a buscar
      * @return usuario: bean del usuario encontrado o null si no existe
@@ -60,6 +59,40 @@ public class UsuarioDao extends DaoPadre{
         }
 
         return result;
+    }
+
+    public BeanUsuario registraUsuario(BeanUsuario usu) {
+        int nuevoId = 0;
+        Statement stmt = null;
+        String query;
+        ResultSet rs;
+
+        try {
+            stmt = con.createStatement();
+
+                query = "INSERT INTO usuarios VALUES(0, '"
+                        + usu.getLogin() + "', '"
+                        + usu.getPass() + "')";
+                log.debug(query);
+                stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+                rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    nuevoId = new Integer(rs.getInt(1));
+                }
+                rs.close();
+        } catch (SQLException ex) {
+            log.error(ex);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex2) {
+                    log.error(ex2);
+                }
+            }
+        }
+
+        return new BeanUsuario(nuevoId, usu.getLogin(), usu.getPass());
     }
 
 }

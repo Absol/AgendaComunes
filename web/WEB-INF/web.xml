@@ -15,6 +15,11 @@
         <servlet-name>CitasAjenas</servlet-name>
         <servlet-class>mx.cinvestav.agendaColab.server.servlets.CitasAjenas</servlet-class>
     </servlet>
+    <servlet>
+        <description>Registro de un nuevo usuario</description>
+        <servlet-name>RegistraUsuairo</servlet-name>
+        <servlet-class>mx.cinvestav.agendaColab.server.servlets.RegistroUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PullProcess</servlet-name>
         <url-pattern>/Pull</url-pattern>
@@ -26,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>CitasAjenas</servlet-name>
         <url-pattern>/CitasAjenas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistraUsuairo</servlet-name>
+        <url-pattern>/RegistraUsuairo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
