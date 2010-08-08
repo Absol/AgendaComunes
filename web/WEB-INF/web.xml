@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <description>Sirve para procesar las peticiones de pull</description>
+        <servlet-name>PullProcess</servlet-name>
+        <servlet-class>mx.cinvestav.agendaColab.server.servlets.ProcesaPull</servlet-class>
+    </servlet>
+    <servlet>
+        <description>Procesa búsquedas de usuario</description>
+        <servlet-name>BuscarUsuario</servlet-name>
+        <servlet-class>mx.cinvestav.agendaColab.server.servlets.BuscarUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <description>Procesa peticiones de ver citas agenas</description>
+        <servlet-name>CitasAjenas</servlet-name>
+        <servlet-class>mx.cinvestav.agendaColab.server.servlets.CitasAjenas</servlet-class>
+    </servlet>
+    <servlet>
+        <description>Registro de un nuevo usuario</description>
+        <servlet-name>RegistraUsuairo</servlet-name>
+        <servlet-class>mx.cinvestav.agendaColab.server.servlets.RegistroUsuario</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PullProcess</servlet-name>
+        <url-pattern>/Pull</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarUsuario</servlet-name>
+        <url-pattern>/BuscaUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CitasAjenas</servlet-name>
+        <url-pattern>/CitasAjenas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistraUsuairo</servlet-name>
+        <url-pattern>/RegistraUsuairo</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
