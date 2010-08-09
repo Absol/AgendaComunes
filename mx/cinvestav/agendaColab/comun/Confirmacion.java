@@ -64,6 +64,10 @@ public class Confirmacion extends Evento {
         return miTipo;
     }
 
+    public BeanCita getCita() {
+        return cita;
+    }
+
     /**
      * @return the listaUsuarios
      */
