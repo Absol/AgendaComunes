@@ -6,6 +6,8 @@ import mx.cinvestav.agendaColab.comun.beans.BeanContacto;
 import mx.cinvestav.agendaColab.comun.beans.BeanUsuario;
 import mx.cinvestav.agendaColab.forms.*;
 import mx.cinvestav.movil.http.HttpPostAgenda;
+import mx.cinvestav.agendaColab.dao.ContactosDao;
+import mx.cinvestav.agendaColab.dao.DaoUsuario;
 
 /**
  *
