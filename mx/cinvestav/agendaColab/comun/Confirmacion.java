@@ -86,4 +86,8 @@ public class Confirmacion extends Evento {
         listaUsuarios.addElement(usuario);
     }
 
+    public String toString() {
+        return "Confirmacion{" + "cita=" + cita + "listaUsuarios=" + listaUsuarios + '}';
+    }
+
 }
