@@ -1,5 +1,7 @@
 package mx.cinvestav.agendaColab.forms;
 import javax.microedition.lcdui.*;
+import mx.cinvestav.agendaColab.comun.beans.BeanCita;
+import java.util.Vector;
 
 /**
  *
@@ -7,6 +9,7 @@ import javax.microedition.lcdui.*;
  */
 public class F_Citas extends List implements CommandListener{
     private CommandListener comm;
+    private Vector citas;
 
     public F_Citas(CommandListener c,String title){
             super(title,Choice.IMPLICIT);
@@ -16,12 +19,19 @@ public class F_Citas extends List implements CommandListener{
             this.setCommandListener(this);
 
     }
-    public void load_personal(){
-        this.append("28/07/10 13:30-14:30 Comida", null);
+    public void load_personal(Vector vec){
+        citas = vec;
+        BeanCita cita = (BeanCita) vec.elementAt(0);
+        this.append(cita.toString(), null);
         this.append("28/07/10 14:30-16:30 Ocupado", null);
         this.append("29/07/10 11:00-12:00 Reunion", null);
         this.append("29/07/10 14:30-16:30 Inventario", null);
     }
+
+    public BeanCita getCitaSelected()
+          {return (BeanCita) citas.elementAt(this.getSelectedIndex());
+    }
+
     public void load_contac(String contact){
         
     }
