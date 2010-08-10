@@ -39,7 +39,12 @@ public class F_UsersData extends Form implements CommandListener {
 
     }
 
+    public BeanContacto getDatos(){
 
+        BeanContacto contacto = new BeanContacto();
+        return contacto;
+        
+    }
     public void commandAction(Command c, Displayable d) {
 		comm.commandAction(c, d);
 	}

@@ -8,6 +8,7 @@ import mx.cinvestav.agendaColab.forms.*;
 import mx.cinvestav.movil.http.HttpPostAgenda;
 import mx.cinvestav.agendaColab.dao.ContactosDao;
 import mx.cinvestav.agendaColab.dao.DaoUsuario;
+import mx.cinvestav.agendaColab.dao.Cola;
 
 /**
  *
@@ -165,5 +166,12 @@ public class FlujoController implements CommandListener {
         } else {
             cambioFroma(c);
         }
+    }
+
+    public BeanUsuario capturaMyUser(){
+        
+        BeanUsuario usr= new BeanUsuario(4,"","");
+        return usr;
+
     }
 }
