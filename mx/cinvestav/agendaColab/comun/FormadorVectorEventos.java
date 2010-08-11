@@ -42,7 +42,10 @@ public class FormadorVectorEventos {
                     break;
                 }
                 case Cancelacion.miTipo: {
-                    throw new UnsupportedOperationException("Not yet implemented");
+                    Cancelacion cancel = new Cancelacion();
+                    cancel.read(input);
+                    vector.addElement(cancel);
+                    break;
                 }
                 case Respuesta.miTipo: {
                     Respuesta resp = new Respuesta();
