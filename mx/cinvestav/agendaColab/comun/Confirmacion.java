@@ -13,8 +13,8 @@ import mx.cinvestav.agendaColab.comun.beans.BeanUsuario;
  */
 public class Confirmacion extends Evento {
     public static final int miTipo = 6;
-    private BeanCita cita;
-    private Vector listaUsuarios;
+    protected BeanCita cita;
+    protected Vector listaUsuarios;
 
     public Confirmacion(){
         listaUsuarios=new Vector();
