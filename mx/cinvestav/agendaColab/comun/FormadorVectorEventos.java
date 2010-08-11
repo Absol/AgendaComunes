@@ -41,6 +41,24 @@ public class FormadorVectorEventos {
                     vector.addElement(cita);
                     break;
                 }
+                case Cancelacion.miTipo: {
+                    throw new UnsupportedOperationException("Not yet implemented");
+                }
+                case Respuesta.miTipo: {
+                    Respuesta resp = new Respuesta();
+                    resp.read(input);
+                    vector.addElement(resp);
+                    break;
+                }
+                case Notificacion.miTipo: {
+                    throw new UnsupportedOperationException("Not yet implemented");
+                }
+                case Confirmacion.miTipo: {
+                    Confirmacion conf = new Confirmacion();
+                    conf.read(input);
+                    vector.addElement(conf);
+                    break;
+                }
             }
         }
 

@@ -12,6 +12,7 @@ public static final int PRIVADA = 0;
 public static final int OCUPADO = 1;
 public static final int PUBLICA = 2;
     private int idCita;
+    private int idServidor;
     private String asunto;
     private Date fechaInicio;
     private Date fechaTermino;
@@ -20,12 +21,17 @@ public static final int PUBLICA = 2;
     public BeanCita(){
     }
 
-    public BeanCita(int id, String asunto, Date fechaInicio, Date fechaTermino, int nivel){
+    public BeanCita(int id, String asunto, Date fechaInicio, Date fechaTermino, int nivel, int idSrv){
         this.idCita=id;
         this.asunto=asunto;
         this.fechaInicio=fechaInicio;
         this.fechaTermino=fechaTermino;
         this.nivel = nivel;
+        this.idServidor = idSrv;
+    }
+
+    public int getIdServidor() {
+        return idServidor;
     }
 
     /**
@@ -65,6 +71,7 @@ public static final int PUBLICA = 2;
             int longitud = 0;
             //1 escribe id
             dOutput.writeInt(idCita);
+            dOutput.writeInt(idServidor);
             if (asunto != null) {
                 longitud = asunto.length();
                 //2 escribe long de asunto
@@ -92,6 +99,7 @@ public static final int PUBLICA = 2;
 
             //1 se lee el id
             idCita = dInput.readInt();
+            idServidor = dInput.readInt();
             //2 se lee longitud de asunto
             longitud = dInput.readByte();
             bytesVec = new byte[longitud];
@@ -113,6 +121,7 @@ public static final int PUBLICA = 2;
     }
 
     public String toString(){
-        return asunto+" "+fechaInicio+"-"+fechaTermino;
+        return "("+idCita+","+idServidor+")"
+                +asunto+" "+fechaInicio+"-"+fechaTermino;
     }
 }
