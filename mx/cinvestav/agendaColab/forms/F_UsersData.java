@@ -1,5 +1,6 @@
 package mx.cinvestav.agendaColab.forms;
 import javax.microedition.lcdui.*;
+import mx.cinvestav.agendaColab.comun.beans.BeanContacto;
 
 /**
  *
@@ -27,6 +28,22 @@ public class F_UsersData extends Form implements CommandListener {
         //this.addCommand(ma2);
         this.setCommandListener(this);
         this.setCommandListener(this);
+    }
+
+    public void load(BeanContacto cont)
+            {
+
+        name.setString(cont.getnombre());
+
+
+
+    }
+
+    public BeanContacto getDatos(){
+
+        BeanContacto contacto = new BeanContacto();
+        return contacto;
+        
     }
     public void commandAction(Command c, Displayable d) {
 		comm.commandAction(c, d);
