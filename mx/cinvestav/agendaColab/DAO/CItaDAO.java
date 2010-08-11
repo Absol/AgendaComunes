@@ -83,7 +83,7 @@ public class CItaDAO extends AbstractDAO{
                     Date fechaTermino=new Date(Long.parseLong(arr[3]));
                     int nivel=new Integer(Integer.parseInt(arr[4])).intValue();
                                     
-                    cita=new BeanCita(id, asunto, fechaInicio, fechaTermino,nivel);
+                    cita=new BeanCita(id, asunto, fechaInicio, fechaTermino,nivel,0);
 	                
 	                Integer clv=new Integer(Integer.parseInt(arr[0]));
 	                
@@ -121,7 +121,7 @@ public class CItaDAO extends AbstractDAO{
                     Date fechaTermino=new Date(Long.parseLong(arr[3]));
                     int nivel=new Integer(Integer.parseInt(arr[4])).intValue();
                                     
-                    cita=new BeanCita(id, asunto, fechaInicio, fechaTermino,nivel);
+                    cita=new BeanCita(id, asunto, fechaInicio, fechaTermino,nivel,0);
                     
                     vec.addElement(cita);
 	            }
@@ -147,7 +147,7 @@ public class CItaDAO extends AbstractDAO{
                     Date fechaTermino=new Date(Long.parseLong(arr[3]));
                     int nivel=new Integer(Integer.parseInt(arr[4])).intValue();
                                     
-                    cita=new BeanCita(id, asunto, fechaInicio, fechaTermino,nivel);
+                    cita=new BeanCita(id, asunto, fechaInicio, fechaTermino,nivel,0);
 
 	                Integer clv=new Integer(Integer.parseInt(arr[0]));
 	                if(clv.equals(identifier)){

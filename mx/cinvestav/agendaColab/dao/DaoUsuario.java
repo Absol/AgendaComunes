@@ -3,7 +3,7 @@
  * En esta clase es necesario guardar los datos del Usuario/Citas
  */
 
-package mx.cinvestav.agendaColab.dao;
+package mx.cinvestav.agendaColab.DAO;
 import mx.cinvestav.agendaColab.comun.beans.BeanUsuario;
 
 /**

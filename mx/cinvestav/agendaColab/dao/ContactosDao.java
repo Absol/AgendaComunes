@@ -3,7 +3,7 @@
  * 
  */
 
-package mx.cinvestav.agendaColab.dao;
+package mx.cinvestav.agendaColab.DAO;
 import mx.cinvestav.agendaColab.comun.beans.BeanContacto;
 /**
  *

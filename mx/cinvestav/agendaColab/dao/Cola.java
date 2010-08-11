@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package mx.cinvestav.agendaColab.dao;
+package mx.cinvestav.agendaColab.DAO;
 import mx.cinvestav.agendaColab.comun.Cambio;
 
 /**
