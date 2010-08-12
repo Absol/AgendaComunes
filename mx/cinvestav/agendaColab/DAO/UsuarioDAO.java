@@ -94,5 +94,12 @@ public class UsuarioDAO extends AbstractDAO{
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    public static void guardaMyUsuario(BeanUsuario myUsuer) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 
+    public static BeanUsuario getMyUser() {
+        //To-Do desharcodear
+        return new BeanUsuario(1, "Absol", "Zapato");
+    }
 }

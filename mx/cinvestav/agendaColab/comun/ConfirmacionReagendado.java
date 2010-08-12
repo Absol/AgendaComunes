@@ -1,13 +1,9 @@
 package mx.cinvestav.agendaColab.comun;
 
 /**
- *
  * @author absol
  */
 public class ConfirmacionReagendado extends Confirmacion{
-public static final int miTipo = 12;
-
-public class CitaPublica extends Confirmacion {
 public static final int miTipo = 14;
 
     public int getMiTipo() {
@@ -17,5 +13,4 @@ public static final int miTipo = 14;
     public String toString() {
         return "ConfirmacionReagendado{" + "cita=" + cita + "listaUsuarios=" + listaUsuarios + '}';
     }
-}
 }
